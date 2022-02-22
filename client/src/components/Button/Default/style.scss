@@ -1,0 +1,13 @@
+@import 'src/assets/scss/_mixins.scss';
+@import 'src/assets/scss/_variables.scss';
+
+.default-button {
+  @include button(9px 24px, 8px, $dodger-blue);
+  transition: transform 0.2s linear;
+  &:hover {
+    transform: translate(-4px, -4px);
+  }
+  &__label {
+    @include text(Arial, 14px, $white);
+  }
+}

@@ -1,0 +1,53 @@
+@mixin text($family, $size, $color, $fontWeight: 400, $lineHeight: normal) {
+  color: $color;
+  font-size: $size;
+  font-family: $family;
+  font-weight: $fontWeight;
+  line-height: $lineHeight;
+
+  margin: 0;
+}
+
+@mixin input($padding, $radius, $background, $width: auto, $height: auto) {
+  // border: none;
+  outline: none;
+
+  width: $width;
+  height: $height;
+
+  padding: $padding;
+  border-radius: $radius;
+  background: $background;
+}
+
+@mixin button(
+  $padding,
+  $radius,
+  $background,
+  $width: auto,
+  $height: auto,
+  $cursor: pointer
+) {
+  border: none;
+  outline: none;
+
+  width: $width;
+  height: $height;
+  padding: $padding;
+  border-radius: $radius;
+
+  background: $background;
+
+  cursor: $cursor;
+}
+
+@mixin flex(
+  $justify-content: flex-start,
+  $align-items: stretch,
+  $direction: row
+) {
+  display: flex;
+  justify-content: $justify-content;
+  align-items: $align-items;
+  flex-direction: $direction;
+}
