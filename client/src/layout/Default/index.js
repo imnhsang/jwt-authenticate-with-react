@@ -1,8 +1,10 @@
 import * as React from 'react'
+
 import logo from 'assets/images/logo.svg'
+
 import './style.scss'
 
-function MainPage() {
+function DefaultLayout() {
   return (
     <div className='App'>
       <header className='App-header'>
@@ -23,4 +25,4 @@ function MainPage() {
   )
 }
 
-export default MainPage
+export default DefaultLayout
