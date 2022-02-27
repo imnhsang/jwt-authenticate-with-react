@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.scss'
 import App from './core/App'
 import reportWebVitals from './reportWebVitals'
 

@@ -11,7 +11,7 @@
     @include input(8px 12px, 6px, transparent, calc(100% - 24px - 4px));
     @include text(Arial, 14px, $zambezi);
     border: 2px solid $whisper;
-    margin-bottom: 3px;
+    margin-bottom: 2px;
     &--password {
       width: calc(100% - 44px - 4px);
       padding-right: 32px;
@@ -19,7 +19,7 @@
   }
   &__secure {
     @include button(0 0, 0, transparent);
-    margin-top: 9px;
+    margin-top: 3px;
     position: absolute;
     top: 50%;
     right: 12px;
@@ -30,6 +30,9 @@
     }
   }
   &__error {
-    @include text(Arial, 11px, $amaranth, 500);
+    @include text(Arial, 11px, transparent, 500);
+    &.active {
+      color: $amaranth;
+    }
   }
 }

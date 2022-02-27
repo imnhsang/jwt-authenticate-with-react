@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
 import classNames from 'classnames'
+import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 
@@ -53,7 +53,14 @@ function DefaultInput({
           />
         </button>
       )}
-      {errorStatus && <p className='default-input__error'>{errorMsg}</p>}
+      <p
+        className={classNames([
+          'default-input__error',
+          { active: errorStatus }
+        ])}
+      >
+        {errorStatus ? errorMsg : 'valid'}
+      </p>
     </div>
   )
 }

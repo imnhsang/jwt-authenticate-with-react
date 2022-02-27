@@ -1,6 +1,9 @@
-import { getValueFromStorage } from 'utils/helpers'
-import { StorageKey } from 'utils/constants'
+import { useSelector } from 'react-redux'
 
-const useAuth = () => getValueFromStorage(StorageKey.authAccessToken)
+const useCheckAuthentication = () => {
+  const isAuthenticated = useSelector(({ auth }) => auth.isAuthenticated)
 
-export default useAuth
+  return isAuthenticated
+}
+
+export default useCheckAuthentication
