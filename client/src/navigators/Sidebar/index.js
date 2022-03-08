@@ -1,29 +1,34 @@
-import * as React from 'react'
+import React from 'react'
+import { Link } from 'react-router-dom'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngleLeft } from '@fortawesome/free-solid-svg-icons'
+import _nav from '../_nav'
 
 import './style.scss'
 
 function Sidebar() {
   return (
     <div className='sidebar'>
-      <div className='sidebar__logo'>
-        <p className='sidebar__logo__text'>Logo</p>
-      </div>
-      <div className='sidebar__nav-bar'>
-        <div className='sidebar__nav-item'>
-          <p className='sidebar__nav-item__label'>Nav Item</p>
+      <div className='sidebar__main'>
+        <div>
+          <div className='sidebar__logo'>
+            <p className='sidebar__logo__text'>Logo</p>
+          </div>
+          <ul className='sidebar__nav-bar'>
+            {_nav.map((nav) => (
+              <li key={nav?.key} className='sidebar__nav-item'>
+                <Link to={nav?.to} className='sidebar__nav-item__link'>
+                  {nav?.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
       <div className='sidebar__others'>
         <div className='sidebar__others__storage'>
           <p className='sidebar__others__storage__used'>
-            You using 4.5GB / 16GB
+            You are using 4.5GB / 16GB
           </p>
-        </div>
-        <div className='sidebar__others__collapse'>
-          <FontAwesomeIcon icon={faAngleLeft} />
         </div>
       </div>
     </div>
@@ -31,3 +36,5 @@ function Sidebar() {
 }
 
 export default Sidebar
+
+Sidebar.whyDidYouRender = true

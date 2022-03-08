@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 
 import Header from 'navigators/Header'
 import Sidebar from 'navigators/Sidebar'

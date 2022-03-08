@@ -41,6 +41,26 @@
   cursor: $cursor;
 }
 
+@mixin list() {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@mixin link($family, $size, $color, $lineHeight: normal) {
+  font-family: $family;
+  font-size: $size;
+  color: $color;
+  line-height: $lineHeight;
+  text-decoration: none;
+  outline: none;
+  &:hover,
+  &:active,
+  &:focus {
+    outline: none;
+  }
+}
+
 @mixin flex(
   $justify-content: flex-start,
   $align-items: stretch,
