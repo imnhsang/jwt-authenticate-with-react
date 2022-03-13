@@ -2,16 +2,20 @@
 @import 'src/assets/scss/_variables.scss';
 
 .default-button {
-  @include button(
-    9px 24px,
-    24px,
-    linear-gradient(45deg, rgba(17, 94, 222, 1) 0%, rgba(7, 138, 229, 1) 50%)
-  );
-  transition: transform 0.2s linear;
-  &:hover {
-    transform: translate(-4px, -4px);
-  }
+  @include button(9px 24px, 24px, $medium-blue);
+
   &__label {
     @include text(Arial, 14px, $white);
+  }
+  &.gradient-background {
+    transition: transform 0.2s linear;
+    background: linear-gradient(
+      45deg,
+      rgba(17, 94, 222, 1) 0%,
+      rgba(7, 138, 229, 1) 50%
+    );
+    &:hover {
+      transform: translate(-4px, -4px);
+    }
   }
 }

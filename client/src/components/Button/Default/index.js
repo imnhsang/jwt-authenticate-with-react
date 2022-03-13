@@ -1,18 +1,28 @@
-import React from 'react'
+import React, { memo } from 'react'
 import classNames from 'classnames'
 
 import './style.scss'
 
-function DefaultButton({ type = 'button', onClick, className, children }) {
+function DefaultButton({
+  type = 'button',
+  className,
+  onClick,
+  children,
+  gradient
+}) {
   return (
     <button
       type={type}
       onClick={onClick}
-      className={classNames(['default-button', className])}
+      className={classNames([
+        'default-button',
+        { 'gradient-background': gradient },
+        className
+      ])}
     >
       <div className='default-button__label'>{children}</div>
     </button>
   )
 }
 
-export default DefaultButton
+export default memo(DefaultButton)

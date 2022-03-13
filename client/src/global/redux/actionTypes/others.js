@@ -1,0 +1,7 @@
+const Others = {
+  FAIL_REQUEST_OTHERS: 'FAIL_REQUEST_OTHERS',
+  REQUEST_CHANGE_NAV : 'REQUEST_CHANGE_NAV',
+  CHANGE_NAV         : 'CHANGE_NAV'
+}
+
+export default Others

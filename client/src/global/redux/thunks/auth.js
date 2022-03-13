@@ -1,4 +1,4 @@
-import { authLogin, requestLoginAuth, failRequestAuth } from '../actions/auth'
+import { authLogin, requestAuthLogin, failRequestAuth } from '../actions/auth'
 
 import { AuthService } from '../services'
 
@@ -8,7 +8,7 @@ import { StorageKey, ToastType } from 'utils/constants'
 
 export const login = (email, password) => async (dispatch) => {
   try {
-    dispatch(requestLoginAuth())
+    dispatch(requestAuthLogin())
 
     const body = {
       email,

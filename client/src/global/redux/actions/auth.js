@@ -4,7 +4,7 @@ export const failRequestAuth = () => ({
   type: Auth.FAIL_REQUEST_AUTH
 })
 
-export const requestLoginAuth = () => ({
+export const requestAuthLogin = () => ({
   type: Auth.REQUEST_AUTH_LOGIN
 })
 
@@ -12,7 +12,7 @@ export const authLogin = () => ({
   type: Auth.AUTH_LOGIN
 })
 
-export const requestLogoutAuth = () => ({
+export const requestAuthLogout = () => ({
   type: Auth.REQUEST_AUTH_LOGOUT
 })
 

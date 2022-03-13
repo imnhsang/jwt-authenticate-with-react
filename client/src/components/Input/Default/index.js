@@ -1,5 +1,5 @@
+import React, { useState, memo } from 'react'
 import classNames from 'classnames'
-import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 
@@ -65,4 +65,4 @@ function DefaultInput({
   )
 }
 
-export default DefaultInput
+export default memo(DefaultInput)

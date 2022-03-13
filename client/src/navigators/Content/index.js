@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, memo } from 'react'
 import { Routes, Route } from 'react-router-dom'
 
 import routes from '../routes'
@@ -19,6 +19,6 @@ function Content() {
   )
 }
 
-export default Content
+export default memo(Content)
 
 Content.whyDidYouRender = true

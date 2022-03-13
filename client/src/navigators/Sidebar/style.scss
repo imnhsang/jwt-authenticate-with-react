@@ -3,7 +3,7 @@
 
 .sidebar {
   @include flex(space-between, null, column);
-  width: 280;
+  width: 280px;
   height: 100vh;
   background: $snow;
   &__logo {

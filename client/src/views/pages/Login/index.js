@@ -112,6 +112,7 @@ function LoginPage() {
           </div>
           <DefaultButton
             type='button'
+            gradient
             className='login-page__login-btn'
             onClick={handleLogin}
           >

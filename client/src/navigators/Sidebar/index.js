@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { memo } from 'react'
+import classNames from 'classnames'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 import _nav from '../_nav'
 
 import './style.scss'
 
 function Sidebar() {
+  const currentNav = useSelector(({ others }) => others?.currentNav)
+
   return (
     <div className='sidebar'>
       <div className='sidebar__main'>
@@ -16,7 +20,13 @@ function Sidebar() {
           <ul className='sidebar__nav-bar'>
             {_nav.map((nav) => (
               <li key={nav?.key} className='sidebar__nav-item'>
-                <Link to={nav?.to} className='sidebar__nav-item__link'>
+                <Link
+                  to={nav?.to}
+                  className={classNames([
+                    'sidebar__nav-item__link',
+                    { active: nav?.key === currentNav }
+                  ])}
+                >
                   {nav?.name}
                 </Link>
               </li>
@@ -24,17 +34,17 @@ function Sidebar() {
           </ul>
         </div>
       </div>
-      <div className='sidebar__others'>
+      {/* <div className='sidebar__others'>
         <div className='sidebar__others__storage'>
           <p className='sidebar__others__storage__used'>
             You are using 4.5GB / 16GB
           </p>
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }
 
-export default Sidebar
+export default memo(Sidebar)
 
 Sidebar.whyDidYouRender = true

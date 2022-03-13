@@ -1,0 +1,36 @@
+@import 'src/assets/scss/_mixins.scss';
+@import 'src/assets/scss/_variables.scss';
+
+.header {
+  @include flex(space-between, center);
+  padding: 48px 24px 24px;
+  width: calc(100vw - 280px - 48px);
+  &__search-bar {
+    &__search-btn {
+      @include button(0, 0, transparent);
+    }
+    &__icon {
+      width: 16px;
+      height: 16px;
+      color: $zambezi;
+    }
+    &__input {
+      @include input(8px 12px, 0, transparent);
+      @include text(Arial, 13px, $night-rider, 500);
+      border: 0;
+      &::placeholder {
+        color: $pink-swan;
+      }
+    }
+  }
+  &__personal {
+  }
+  &__extras-btn {
+    @include button(0, 0, transparent);
+  }
+  &__avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+  }
+}
