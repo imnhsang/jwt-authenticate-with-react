@@ -20,7 +20,7 @@ function DefaultButton({
         className
       ])}
     >
-      <div className='default-button__label'>{children}</div>
+      {children}
     </button>
   )
 }

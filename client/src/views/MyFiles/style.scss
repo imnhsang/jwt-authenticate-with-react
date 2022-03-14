@@ -1,0 +1,26 @@
+@import 'src/assets/scss/_mixins.scss';
+@import 'src/assets/scss/_variables.scss';
+
+.my-files {
+  padding: 12px 36px 24px;
+  &__header {
+    @include flex(space-between, center);
+  }
+  &__title {
+    @include text(Arial, 20px, $black-0c, 600);
+    text-transform: uppercase;
+  }
+  &__upload-file-btn {
+    @include flex(null, center);
+    &__icon {
+      width: 16px;
+      height: 16px;
+      margin-right: 6px;
+      color: $white;
+    }
+    &__label {
+      @include text(Arial, 11px, $white, 600);
+      text-transform: uppercase;
+    }
+  }
+}

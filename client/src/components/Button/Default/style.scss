@@ -3,10 +3,6 @@
 
 .default-button {
   @include button(9px 24px, 24px, $medium-blue);
-
-  &__label {
-    @include text(Arial, 14px, $white);
-  }
   &.gradient-background {
     transition: transform 0.2s linear;
     background: linear-gradient(

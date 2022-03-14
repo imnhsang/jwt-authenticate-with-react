@@ -45,7 +45,7 @@
   &__login-btn {
     min-width: 110px;
     &__label {
-      font-weight: 600;
+      @include text(Arial, 14px, $white, 600);
     }
   }
   &__form {

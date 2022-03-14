@@ -116,7 +116,7 @@ function LoginPage() {
             className='login-page__login-btn'
             onClick={handleLogin}
           >
-            <span className='login-page__login-btn__label'>Sign In</span>
+            <p className='login-page__login-btn__label'>Sign In</p>
           </DefaultButton>
         </div>
       </div>

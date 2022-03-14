@@ -1,14 +1,22 @@
 import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
 
 import DefaultButton from 'components/Button/Default'
+
+import './style.scss'
 
 function MyFiles() {
   return (
     <div className='my-files'>
       <div className='my-files__header'>
-        <p className='my-files__title'>Your files</p>
-        <DefaultButton className='my-files__upload-files-btn'>
-          Upload a new file
+        <h1 className='my-files__title'>Your files</h1>
+        <DefaultButton className='my-files__upload-file-btn'>
+          <FontAwesomeIcon
+            icon={faArrowUp}
+            className='my-files__upload-file-btn__icon'
+          />
+          <p className='my-files__upload-file-btn__label'>Upload a new file</p>
         </DefaultButton>
       </div>
     </div>

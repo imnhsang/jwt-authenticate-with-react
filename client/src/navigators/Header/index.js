@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { faBell, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 
 import AvatarExample from 'assets/images/avatar.jpeg'
 
@@ -23,6 +23,13 @@ function Header() {
         />
       </div>
       <div className='header__personal'>
+        <button type='button' className='header__notification-btn'>
+          <FontAwesomeIcon
+            className='header__notification-bell'
+            icon={faBell}
+          />
+          <div className='header__notification-bell__dot-new' />
+        </button>
         <button type='button' className='header__extras-btn'>
           <img
             className='header__avatar'
