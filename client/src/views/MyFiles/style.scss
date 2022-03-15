@@ -5,6 +5,7 @@
   padding: 12px 36px 24px;
   &__header {
     @include flex(space-between, center);
+    margin-bottom: 36px;
   }
   &__title {
     @include text(Arial, 20px, $black-0c, 600);
@@ -21,6 +22,42 @@
     &__label {
       @include text(Arial, 11px, $white, 600);
       text-transform: uppercase;
+    }
+  }
+  &__list {
+    height: calc(100vh - 217px);
+    overflow-y: scroll;
+    padding-right: 28px;
+    /* width */
+    &::-webkit-scrollbar {
+      width: 4px;
+      border-radius: 4px;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+      background: $white-smoke;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+      background: $medium-blue;
+      border-radius: 2px;
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+      background: $medium-blue;
+    }
+  }
+  &__item {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    &:first-child {
+      padding-top: 0;
+    }
+    &:last-child {
+      padding-bottom: 0;
     }
   }
 }

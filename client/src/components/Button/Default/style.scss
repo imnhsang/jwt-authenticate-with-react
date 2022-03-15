@@ -3,6 +3,9 @@
 
 .default-button {
   @include button(9px 24px, 24px, $medium-blue);
+  &.anger-background {
+    background: $red;
+  }
   &.gradient-background {
     transition: transform 0.2s linear;
     background: linear-gradient(

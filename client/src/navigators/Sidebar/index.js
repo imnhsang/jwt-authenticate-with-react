@@ -1,14 +1,13 @@
 import React, { memo } from 'react'
 import classNames from 'classnames'
-import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { Link, useLocation } from 'react-router-dom'
 
 import _nav from '../_nav'
 
 import './style.scss'
 
 function Sidebar() {
-  const currentNav = useSelector(({ others }) => others?.currentNav)
+  const { pathname: currentNav } = useLocation()
 
   return (
     <div className='sidebar'>
@@ -24,7 +23,7 @@ function Sidebar() {
                   to={nav?.to}
                   className={classNames([
                     'sidebar__nav-item__link',
-                    { active: nav?.key === currentNav }
+                    { active: nav?.to === currentNav }
                   ])}
                 >
                   {nav?.name}

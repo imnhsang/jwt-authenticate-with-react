@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
 
 import DefaultButton from 'components/Button/Default'
+import FileItem from './FileItem'
 
 import './style.scss'
 
@@ -18,6 +19,44 @@ function MyFiles() {
           />
           <p className='my-files__upload-file-btn__label'>Upload a new file</p>
         </DefaultButton>
+      </div>
+      <div className='my-files__list'>
+        <div className='my-files__item'>
+          <FileItem />
+        </div>
+        <div className='my-files__item'>
+          <FileItem />
+        </div>
+        <div className='my-files__item'>
+          <FileItem />
+        </div>
+        <div className='my-files__item'>
+          <FileItem />
+        </div>
+        <div className='my-files__item'>
+          <FileItem />
+        </div>
+        <div className='my-files__item'>
+          <FileItem />
+        </div>{' '}
+        <div className='my-files__item'>
+          <FileItem />
+        </div>
+        <div className='my-files__item'>
+          <FileItem />
+        </div>
+        <div className='my-files__item'>
+          <FileItem />
+        </div>
+        <div className='my-files__item'>
+          <FileItem />
+        </div>
+        <div className='my-files__item'>
+          <FileItem />
+        </div>
+        <div className='my-files__item'>
+          <FileItem />
+        </div>
       </div>
     </div>
   )

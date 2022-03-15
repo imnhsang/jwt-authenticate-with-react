@@ -8,7 +8,8 @@ function DefaultButton({
   className,
   onClick,
   children,
-  gradient
+  gradient,
+  danger
 }) {
   return (
     <button
@@ -16,6 +17,7 @@ function DefaultButton({
       onClick={onClick}
       className={classNames([
         'default-button',
+        {'danger-background': danger},
         { 'gradient-background': gradient },
         className
       ])}

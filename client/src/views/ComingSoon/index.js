@@ -1,7 +1,9 @@
 import React from 'react'
 
-function ComingSoon({ routeName }) {
-  return <div className='coming-soon'>{routeName} is coming soon</div>
+import './style.scss'
+
+function ComingSoon() {
+  return <div className='coming-soon'>Coming soon...</div>
 }
 
 export default ComingSoon
