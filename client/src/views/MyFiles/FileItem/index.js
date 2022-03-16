@@ -11,6 +11,7 @@ function FileItem() {
     <div className='my-files__file-item'>
       <div className='my-files__file-item__delete-action'>
         <button
+          title='Delete file'
           className='my-files__file-item__delete-btn'
           onClick={() => console.log('delete button')}
         >

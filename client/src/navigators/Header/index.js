@@ -1,12 +1,37 @@
-import React, { memo } from 'react'
+
+import React, { memo, useState, useRef } from 'react'
+import { useDispatch } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBell, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+
+import { useClickAway } from 'components/Hooks'
+
+import { logout } from 'global/redux/thunks/auth'
 
 import AvatarExample from 'assets/images/avatar.jpeg'
 
 import './style.scss'
 
 function Header() {
+  const dispatch = useDispatch()
+  const extrasDropdownRef = useRef(null)
+  const [showExtrasDropdown, setShowExtrasDropdown] = useState(false)
+
+  useClickAway(extrasDropdownRef, () => handleToggleShowExtrasDropdown(), [
+    'click'
+  ])
+
+  const handleToggleShowExtrasDropdown = () =>
+    setShowExtrasDropdown(!showExtrasDropdown)
+
+  const handleLogout = () => {
+    const { status } = dispatch(logout())
+
+    if (status) {
+      setShowExtrasDropdown(!showExtrasDropdown)
+    }
+  }
+
   return (
     <div className='header'>
       <div className='header__search-bar'>
@@ -30,13 +55,28 @@ function Header() {
           />
           <div className='header__notification-bell__dot-new' />
         </button>
-        <button type='button' className='header__extras-btn'>
+
+        <button
+          type='button'
+          className='header__extras-btn'
+          onClick={handleToggleShowExtrasDropdown}
+        >
           <img
             className='header__avatar'
             src={AvatarExample}
             alt='avatar-header'
           />
         </button>
+        {showExtrasDropdown && (
+          <div className='header__extras-dropdown' ref={extrasDropdownRef}>
+            <button
+              className='header__extras-dropdown__item'
+              onClick={handleLogout}
+            >
+              Log out
+            </button>
+          </div>
+        )}
       </div>
     </div>
   )
