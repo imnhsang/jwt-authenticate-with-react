@@ -1,14 +1,24 @@
-import { authLogin, requestLoginAuth, failRequestAuth } from '../actions/auth'
+import {
+  authLogin,
+  requestAuthLogin,
+  authLogout,
+  requestAuthLogout,
+  failRequestAuth
+} from '../actions/auth'
 
 import { AuthService } from '../services'
 
-import { toastifyNotify, setValueToStorage } from 'utils/helpers'
+import {
+  toastifyNotify,
+  setValueToStorage,
+  removeValueFromStorage
+} from 'utils/helpers'
 
 import { StorageKey, ToastType } from 'utils/constants'
 
 export const login = (email, password) => async (dispatch) => {
   try {
-    dispatch(requestLoginAuth())
+    dispatch(requestAuthLogin())
 
     const body = {
       email,
@@ -29,6 +39,24 @@ export const login = (email, password) => async (dispatch) => {
 
       return { status: false }
     }
+  } catch (error) {
+    dispatch(failRequestAuth())
+
+    toastifyNotify(ToastType.ERROR, 'Something happened...')
+
+    return { status: false }
+  }
+}
+
+export const logout = () => (dispatch) => {
+  try {
+    dispatch(requestAuthLogout())
+
+    removeValueFromStorage(StorageKey.authAccessToken)
+
+    dispatch(authLogout())
+
+    return { status: true }
   } catch (error) {
     dispatch(failRequestAuth())
 

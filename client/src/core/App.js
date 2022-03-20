@@ -1,5 +1,5 @@
-import * as React from 'react'
-import {Provider} from 'react-redux'
+import React, { lazy, Suspense } from 'react'
+import { Provider } from 'react-redux'
 import { ToastContainer, Flip } from 'react-toastify'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
@@ -8,8 +8,6 @@ import PrivateRoute from './PrivateRoute'
 import store from './store'
 
 import 'global/libs/reactifyCss'
-
-const { lazy, Suspense } = React
 
 // Layout
 const DefaultLayout = lazy(() => import('layout/Default'))
@@ -26,14 +24,14 @@ function App() {
         closeButton={false}
         newestOnTop
       />
-      
+
       <div className='App'>
         <BrowserRouter>
-          <Suspense fallback={null}>
+          <Suspense fallback={<p>Loading... level 1</p>}>
             <Routes>
               <Route path='/login' element={<LoginPage />} />
               <Route
-                path='/'
+                path='/*'
                 element={
                   <PrivateRoute>
                     <DefaultLayout />

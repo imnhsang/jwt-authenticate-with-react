@@ -1,3 +1,4 @@
 import auth from './auth'
+import others from './others'
 
-export { auth }
+export { auth, others }

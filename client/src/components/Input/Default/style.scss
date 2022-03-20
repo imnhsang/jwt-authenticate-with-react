@@ -9,7 +9,7 @@
   }
   &__box {
     @include input(8px 12px, 6px, transparent, calc(100% - 24px - 4px));
-    @include text(Arial, 14px, $zambezi);
+    @include text(Arial, 14px, $night-rider);
     border: 2px solid $whisper;
     margin-bottom: 2px;
     &--password {
@@ -26,7 +26,7 @@
     transform: translate(0, -50%);
     &__icon {
       width: 13.5px;
-      color: $zambezi;
+      color: $night-rider;
     }
   }
   &__error {

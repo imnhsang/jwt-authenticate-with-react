@@ -1,26 +1,21 @@
-import * as React from 'react'
+import React from 'react'
 
-import logo from 'assets/images/logo.svg'
+import Header from 'navigators/Header'
+import Sidebar from 'navigators/Sidebar'
+import Content from 'navigators/Content'
 
 import './style.scss'
 
 function DefaultLayout() {
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <img src={logo} className='App-logo' alt='logo' />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className='App-link'
-          href='https://reactjs.org'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='default-layout'>
+      <div className='default-layout__left'>
+        <Sidebar />
+      </div>
+      <div className='default-layout__right'>
+        <Header />
+        <Content />
+      </div>
     </div>
   )
 }

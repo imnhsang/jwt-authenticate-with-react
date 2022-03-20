@@ -1,6 +1,6 @@
-import * as React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { Navigate, useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import DefaultInput from 'components/Input/Default'
 import DefaultButton from 'components/Button/Default'
@@ -11,19 +11,11 @@ import { login } from 'global/redux/thunks/auth'
 
 import './style.scss'
 
-const { useEffect } = React
-
 function LoginPage() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
   const isAuthenticated = useCheckAuthentication()
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      return <Navigate to='/' replace />
-    }
-  }, [isAuthenticated])
 
   const [loginInfo, setLoginInfo] = useMergeState({
     email   : '',
@@ -33,6 +25,19 @@ function LoginPage() {
     email   : false,
     password: false
   })
+
+  // If logged in, must redirect to homepage
+  useEffect(() => {
+    if (isAuthenticated) {
+      return handleRedirectPreviousPage()
+    }
+  }, [isAuthenticated])
+
+  const handleRedirectPreviousPage = () => {
+    const from = location.state?.from?.pathname || '/'
+
+    return navigate(from, { replace: true })
+  }
 
   const handleChangeLoginInfo = (e) => {
     const { name, value } = e.target
@@ -71,9 +76,7 @@ function LoginPage() {
 
     const { status } = response
     if (status) {
-      const from = location.state?.from?.pathname || '/'
-
-      return navigate(from, { replace: true })
+      return handleRedirectPreviousPage()
     }
   }
 
@@ -109,10 +112,11 @@ function LoginPage() {
           </div>
           <DefaultButton
             type='button'
+            gradient
             className='login-page__login-btn'
             onClick={handleLogin}
           >
-            <span className='login-page__login-btn__label'>Sign In</span>
+            <p className='login-page__login-btn__label'>Sign In</p>
           </DefaultButton>
         </div>
       </div>
