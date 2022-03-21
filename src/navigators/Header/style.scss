@@ -1,0 +1,78 @@
+@import 'src/assets/scss/_mixins.scss';
+@import 'src/assets/scss/_variables.scss';
+
+.header {
+  @include flex(space-between, center);
+  padding: 36px 36px 24px;
+  width: calc(100vw - 280px - 72px);
+  &__search-bar {
+    &__search-btn {
+      @include button(0, 0, transparent);
+    }
+    &__icon {
+      width: 16px;
+      height: 16px;
+      color: $zambezi;
+    }
+    &__input {
+      @include input(8px 12px, 0, transparent);
+      @include text(Arial, 13px, $night-rider, 500);
+      border: 0;
+      &::placeholder {
+        color: $pink-swan;
+      }
+    }
+  }
+  &__notification-bell {
+    width: 20px;
+    height: 20px;
+
+    color: $very-light-grey;
+    &__dot-new {
+      height: 8px;
+      width: 8px;
+      border-radius: 50%;
+      background-color: $red;
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+  &__personal {
+    @include flex(null, center);
+  }
+  &__extras-btn,
+  &__notification-btn {
+    @include button(0, 0, transparent);
+  }
+  &__notification-btn {
+    position: relative;
+    margin-right: 32px;
+  }
+  &__avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+  }
+  &__extras-dropdown {
+    position: absolute;
+    top: 36px + 36px + 12px;
+    background: $white;
+    padding: 8px;
+    right: 36px;
+    width: 120px;
+    border-radius: 8px;
+    box-shadow: 0 12px 28px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.1),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+    &__item {
+      @include button(0 0, 0, transparent);
+      @include text(Arial, 13px, $night-rider, 700);
+      width: 100%;
+      padding: 8px 16px;
+      border-radius: 8px;
+      &:hover {
+        background-color: $solitude;
+      }
+    }
+  }
+}
