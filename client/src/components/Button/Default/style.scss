@@ -2,7 +2,7 @@
 @import 'src/assets/scss/_variables.scss';
 
 .default-button {
-  @include button(9px 24px, 24px, $medium-blue);
+  @include button(9px 24px, 24px, $navy-blue);
   &.anger-background {
     background: $red;
   }

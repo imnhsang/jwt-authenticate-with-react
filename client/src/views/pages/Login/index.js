@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import DefaultInput from 'components/Input/Default'
 import DefaultButton from 'components/Button/Default'
@@ -119,6 +119,12 @@ function LoginPage() {
             <p className='login-page__login-btn__label'>Sign In</p>
           </DefaultButton>
         </div>
+        <p className='login-page__new-account'>
+          Don&apos;t have an account?{' '}
+          <Link className='login-page__new-account__link' to={'/signup'}>
+            Create new
+          </Link>
+        </p>
       </div>
       <div className='login-page__square-right' />
     </div>

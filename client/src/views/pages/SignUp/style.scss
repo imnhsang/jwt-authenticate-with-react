@@ -1,7 +1,7 @@
 @import 'src/assets/scss/_mixins.scss';
 @import 'src/assets/scss/_variables.scss';
 
-.login-page {
+.signup-page {
   @include flex(center, center);
   position: relative;
   width: 100%;
@@ -19,13 +19,13 @@
     border-radius: 20%;
     position: absolute;
     &-left {
-      @extend .login-page__square;
+      @extend .signup-page__square;
       left: 0;
       bottom: 0;
       transform: translate(-50%, -5%) rotate(-125deg);
     }
     &-right {
-      @extend .login-page__square;
+      @extend .signup-page__square;
       right: 0;
       top: 0;
       transform: translate(40%, -40%) rotate(25deg);
@@ -42,7 +42,7 @@
     text-align: center;
     margin-bottom: 36px;
   }
-  &__login-btn {
+  &__signup-btn {
     min-width: 110px;
     &__label {
       @include text(Arial, 14px, $white, 600);
@@ -50,18 +50,9 @@
   }
   &__form {
     &__email,
+    &__confirm-password,
     &__password {
       margin-bottom: 12px;
-    }
-    margin-bottom: 10px;
-  }
-  &__new-account {
-    @include text(Arial, 12px, $night-rider, 500);
-    &__link {
-      @include link(Arial, 12px, $navy-blue);
-      &:hover {
-        text-decoration: underline;
-      }
     }
   }
 }

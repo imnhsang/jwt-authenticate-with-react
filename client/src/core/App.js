@@ -14,6 +14,7 @@ const DefaultLayout = lazy(() => import('layout/Default'))
 
 // Pages
 const LoginPage = lazy(() => import('views/pages/Login'))
+const SignUpPage = lazy(() => import('views/pages/SignUp'))
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Suspense fallback={<p>Loading... level 1</p>}>
             <Routes>
               <Route path='/login' element={<LoginPage />} />
+              <Route path='/signup' element={<SignUpPage />} />
               <Route
                 path='/*'
                 element={
