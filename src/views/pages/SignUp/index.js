@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 // import { useDispatch } from 'react-redux'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import DefaultInput from 'components/Input/Default'
 import DefaultButton from 'components/Button/Default'
@@ -18,12 +18,16 @@ function SignUpPage() {
   const isAuthenticated = useCheckAuthentication()
 
   const [signupInfo, setSignUpInfo] = useMergeState({
-    email   : '',
-    password: ''
+    fullName       : '',
+    email          : '',
+    password       : '',
+    confirmPassword: ''
   })
   const [errors, setErrors] = useMergeState({
-    email   : false,
-    password: false
+    fullName       : false,
+    email          : false,
+    password       : false,
+    confirmPassword: false
   })
 
   // If logged in, must redirect to homepage
@@ -88,6 +92,17 @@ function SignUpPage() {
         <div className='signup-page__form'>
           <div className='signup-page__form__email'>
             <DefaultInput
+              name='fullName'
+              label='Full Name'
+              value={signupInfo?.fullName}
+              onChange={handleChangeSignUpInfo}
+              onKeyDown={handleKeyDownSignUpInfo}
+              errorStatus={errors?.fullName}
+              errorMsg='Please enter full name'
+            />
+          </div>
+          <div className='signup-page__form__email'>
+            <DefaultInput
               name='email'
               type='email'
               label='Email ID'
@@ -131,6 +146,12 @@ function SignUpPage() {
             <p className='signup-page__signup-btn__label'>Sign Up</p>
           </DefaultButton>
         </div>
+        <p className='signup-page__new-account'>
+          I had the account?{' '}
+          <Link className='signup-page__new-account__link' to={'/login'}>
+            Sign in now
+          </Link>
+        </p>
       </div>
       <div className='signup-page__square-right' />
     </div>
