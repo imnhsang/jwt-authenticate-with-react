@@ -54,5 +54,15 @@
     &__password {
       margin-bottom: 12px;
     }
+    margin-bottom: 10px;
+  }
+  &__new-account {
+    @include text(Arial, 12px, $night-rider, 500);
+    &__link {
+      @include link(Arial, 12px, $navy-blue);
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 }
