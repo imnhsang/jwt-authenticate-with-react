@@ -1,10 +1,4 @@
-import {
-  authLogin,
-  requestAuthLogin,
-  authLogout,
-  requestAuthLogout,
-  failRequestAuth
-} from '../actions/auth'
+import authAction from '../actions/auth'
 
 import { AuthService } from '../services'
 
@@ -18,29 +12,29 @@ import { StorageKey, ToastType } from 'utils/constants'
 
 export const login = (email, password) => async (dispatch) => {
   try {
-    dispatch(requestAuthLogin())
+    dispatch(authAction.requestLogin())
 
     const body = {
       email,
       password
     }
-    const response = await AuthService.login(body)
+    const token = await AuthService.login(body)
 
-    if (response) {
-      setValueToStorage(StorageKey.authAccessToken, 'token')
+    if (token) {
+      setValueToStorage(StorageKey.authAccessToken, token)
 
-      dispatch(authLogin())
+      dispatch(authAction.login())
 
       return { status: true }
     } else {
-      dispatch(failRequestAuth())
+      dispatch(authAction.failRequestAuth())
 
       toastifyNotify(ToastType.ERROR, 'Something happened...')
 
       return { status: false }
     }
   } catch (error) {
-    dispatch(failRequestAuth())
+    dispatch(authAction.failRequestAuth())
 
     toastifyNotify(ToastType.ERROR, 'Something happened...')
 
@@ -50,15 +44,15 @@ export const login = (email, password) => async (dispatch) => {
 
 export const logout = () => (dispatch) => {
   try {
-    dispatch(requestAuthLogout())
+    dispatch(authAction.requestLogout())
 
     removeValueFromStorage(StorageKey.authAccessToken)
 
-    dispatch(authLogout())
+    dispatch(authAction.logout())
 
     return { status: true }
   } catch (error) {
-    dispatch(failRequestAuth())
+    dispatch(authAction.failRequestAuth)
 
     toastifyNotify(ToastType.ERROR, 'Something happened...')
 
