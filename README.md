@@ -8,6 +8,6 @@ Install all packages which the project need.
 After that you should proceed:
 ```
 
-### `yarn dev` or `yarn start`
+### `yarn dev`
 Runs the app in the development mode.
 Open http://localhost:3000 to view it in your browser.
