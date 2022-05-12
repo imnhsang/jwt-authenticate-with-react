@@ -19,7 +19,7 @@ const instancesInfo = [
   {
     name   : 'api',
     secure : true,
-    baseURL: Env.API_URL,
+    baseURL: `${Env.API_URL}/api`,
     headers: {},
   },
 ]
@@ -32,6 +32,7 @@ const createInstance = ({ baseURL, headers, secure }) => {
       Accept        : 'application/json',
       'Content-Type': 'application/json',
     },
+    withCredentials: secure
   })
 
   instance.interceptors.request.use(

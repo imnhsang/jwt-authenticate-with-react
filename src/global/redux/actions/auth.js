@@ -4,27 +4,27 @@ const failRequestAuth = () => ({
   type: Auth.FAIL_REQUEST_AUTH
 })
 
-const requestLogin = () => ({
+const requestLogIn = () => ({
   type: Auth.REQUEST_LOGIN
 })
 
-const login = () => ({
+const logIn = () => ({
   type: Auth.LOGIN
 })
 
-const requestLogout = () => ({
+const requestLogOut = () => ({
   type: Auth.REQUEST_LOGOUT
 })
 
-const logout = () => ({
+const logOut = () => ({
   type: Auth.LOGOUT
 })
 
 export default {
   failRequestAuth,
 
-  requestLogin,
-  login,
-  requestLogout,
-  logout
+  requestLogIn,
+  logIn,
+  requestLogOut,
+  logOut
 }

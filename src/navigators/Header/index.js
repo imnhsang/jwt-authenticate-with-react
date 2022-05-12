@@ -6,7 +6,7 @@ import { faBell, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 
 import { useClickAway } from 'components/Hooks'
 
-import { logout } from 'global/redux/thunks/auth'
+import { logOut } from 'global/redux/thunks/auth'
 
 import AvatarExample from 'assets/images/avatar.jpeg'
 
@@ -25,7 +25,7 @@ function Header() {
     setShowExtrasDropdown(!showExtrasDropdown)
 
   const handleLogout = () => {
-    const { status } = dispatch(logout())
+    const { status } = dispatch(logOut())
 
     if (status) {
       setShowExtrasDropdown(!showExtrasDropdown)

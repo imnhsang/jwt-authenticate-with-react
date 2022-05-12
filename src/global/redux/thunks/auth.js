@@ -1,61 +1,80 @@
-import authAction from '../actions/auth'
+import AuthAction from '../actions/auth'
 
 import { AuthService } from '../services'
 
 import {
-  toastifyNotify,
+  catchThunkError,
   setValueToStorage,
-  removeValueFromStorage
+  removeValueFromStorage,
 } from 'utils/helpers'
 
-import { StorageKey, ToastType } from 'utils/constants'
+import { StorageKey } from 'utils/constants'
 
-export const login = (email, password) => async (dispatch) => {
+export const signUp = (signUpInfos) => async (dispatch) => {
   try {
-    dispatch(authAction.requestLogin())
+    dispatch(AuthAction.requestLogIn())
+
+    const body = {
+      ...signUpInfos
+    }
+    await AuthService.signUp(body)
+
+    return { status: true }
+  } catch (error) {
+    return dispatch(catchThunkError({
+      error,
+      response: {
+        status: false
+      },
+      onAction: AuthAction.failRequestAuth,
+    }))
+  }
+}
+
+export const logIn = (email, password) => async (dispatch) => {
+  try {
+    dispatch(AuthAction.requestLogIn())
 
     const body = {
       email,
       password
     }
-    const token = await AuthService.login(body)
+    const token = await AuthService.logIn(body)
 
-    if (token) {
-      setValueToStorage(StorageKey.authAccessToken, token)
+    setValueToStorage(StorageKey.authAccessToken, token)
 
-      dispatch(authAction.login())
-
-      return { status: true }
-    } else {
-      dispatch(authAction.failRequestAuth())
-
-      toastifyNotify(ToastType.ERROR, 'Something happened...')
-
-      return { status: false }
-    }
-  } catch (error) {
-    dispatch(authAction.failRequestAuth())
-
-    toastifyNotify(ToastType.ERROR, 'Something happened...')
-
-    return { status: false }
-  }
-}
-
-export const logout = () => (dispatch) => {
-  try {
-    dispatch(authAction.requestLogout())
-
-    removeValueFromStorage(StorageKey.authAccessToken)
-
-    dispatch(authAction.logout())
+    dispatch(AuthAction.logIn())
 
     return { status: true }
   } catch (error) {
-    dispatch(authAction.failRequestAuth)
+    return dispatch(catchThunkError({
+      error,
+      response: {
+        status: false
+      },
+      onAction: AuthAction.failRequestAuth,
+    }))
+  }
+}
 
-    toastifyNotify(ToastType.ERROR, 'Something happened...')
+export const logOut = () => async (dispatch) => {
+  try {
+    dispatch(AuthAction.requestLogOut())
 
-    return { status: false }
+    await AuthService.logOut()
+
+    removeValueFromStorage(StorageKey.authAccessToken)
+
+    dispatch(AuthAction.logOut())
+
+    return { status: true }
+  } catch (error) {
+    return dispatch(catchThunkError({
+      error,
+      response: {
+        status: false
+      },
+      onAction: AuthAction.failRequestAuth,
+    }))
   }
 }
