@@ -1,4 +1,10 @@
 import Auth from './auth'
 import Others from './others'
+import Profile from './profile'
 
-export { Auth, Others }
+export {
+  Auth,
+  Profile,
+
+  Others
+}

@@ -1,5 +1,9 @@
 import { Others } from '../actionTypes'
 
-export const failRequestOthers = () => ({
+const failRequestOthers = () => ({
   type: Others.FAIL_REQUEST_OTHERS
 })
+
+export default {
+  failRequestOthers
+}

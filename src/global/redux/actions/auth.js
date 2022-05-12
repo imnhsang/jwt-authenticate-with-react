@@ -1,21 +1,30 @@
 import { Auth } from '../actionTypes'
 
-export const failRequestAuth = () => ({
+const failRequestAuth = () => ({
   type: Auth.FAIL_REQUEST_AUTH
 })
 
-export const requestAuthLogin = () => ({
-  type: Auth.REQUEST_AUTH_LOGIN
+const requestLogIn = () => ({
+  type: Auth.REQUEST_LOGIN
 })
 
-export const authLogin = () => ({
-  type: Auth.AUTH_LOGIN
+const logIn = () => ({
+  type: Auth.LOGIN
 })
 
-export const requestAuthLogout = () => ({
-  type: Auth.REQUEST_AUTH_LOGOUT
+const requestLogOut = () => ({
+  type: Auth.REQUEST_LOGOUT
 })
 
-export const authLogout = () => ({
-  type: Auth.AUTH_LOGOUT
+const logOut = () => ({
+  type: Auth.LOGOUT
 })
+
+export default {
+  failRequestAuth,
+
+  requestLogIn,
+  logIn,
+  requestLogOut,
+  logOut
+}

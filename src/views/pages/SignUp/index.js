@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-// import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import DefaultInput from 'components/Input/Default'
@@ -7,27 +7,35 @@ import DefaultButton from 'components/Button/Default'
 
 import { useMergeState, useCheckAuthentication } from 'components/Hooks'
 
-// import { signup } from 'global/redux/thunks/auth'
+import { signUp } from 'global/redux/thunks/auth'
+
+import { splitCamelCaseToString, toastSuccess } from 'utils/helpers'
 
 import './style.scss'
 
 function SignUpPage() {
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
   const isAuthenticated = useCheckAuthentication()
 
-  const [signupInfo, setSignUpInfo] = useMergeState({
+  const [signUpInfos, setSignUpInfos] = useMergeState({
     fullName       : '',
     email          : '',
     password       : '',
     confirmPassword: ''
   })
-  const [errors, setErrors] = useMergeState({
+  const [errorStatuses, setErrorStatuses] = useMergeState({
     fullName       : false,
     email          : false,
     password       : false,
     confirmPassword: false
+  })
+  const [errorMsgs, setErrorMsgs] = useMergeState({
+    fullName       : '',
+    email          : '',
+    password       : '',
+    confirmPassword: ''
   })
 
   // If logged in, must redirect to homepage
@@ -43,45 +51,58 @@ function SignUpPage() {
     return navigate(from, { replace: true })
   }
 
-  const handleChangeSignUpInfo = (e) => {
+  const handleChangeSignUpInfos = (e) => {
     const { name, value } = e.target
-    if (errors[name]) {
-      setErrors({ [name]: false })
+    if (errorStatuses[name]) {
+      setErrorStatuses({ [name]: false })
+      setErrorMsgs({ [name]: '' })
     }
 
-    setSignUpInfo({ [name]: value })
+    setSignUpInfos({ [name]: value })
   }
 
-  const handleKeyDownSignUpInfo = (e) => e.key === 'Enter' && handleSignUp()
+  const handleKeyDownSignUpInfos = (e) => e.key === 'Enter' && handleSignUp()
 
-  const handleValidateSignUpInfo = () => {
+  const handleValidateSignUpInfos = () => {
     let hasError = false
 
-    Object.keys(signupInfo).forEach((key) => {
-      if (signupInfo[key]?.length === 0) {
-        setErrors({ [key]: true })
+    Object.keys(signUpInfos).forEach((key) => {
+      if (signUpInfos[key]?.length === 0) {
+        setErrorStatuses({ [key]: true })
+        setErrorMsgs({ [key]: `Please enter ${splitCamelCaseToString(key)}` })
+
         hasError = true
       } else {
-        setErrors({ [key]: false })
+        setErrorStatuses({ [key]: false })
+        setErrorMsgs({ [key]: '' })
       }
     })
+
+    if (!hasError) {
+      const isConfirmPasswordMatched = signUpInfos?.confirmPassword === signUpInfos?.password
+
+      setErrorMsgs({ confirmPassword: !isConfirmPasswordMatched ? 'The confirm password must match password.' : '' })
+      setErrorStatuses({ confirmPassword: !isConfirmPasswordMatched })
+
+      hasError = !isConfirmPasswordMatched
+    }
 
     return hasError
   }
 
   const handleSignUp = async () => {
-    const hasError = handleValidateSignUpInfo()
+    const hasError = handleValidateSignUpInfos()
     if (hasError) {
       return
     }
 
-    // const { email, password } = signupInfo
-    // const response = await dispatch(signup(email, password))
+    const { status } = await dispatch(signUp(signUpInfos))
 
-    // const { status } = response
-    // if (status) {
-    // return handleRedirectPreviousPage()
-    // }
+    if (status) {
+      toastSuccess('Sign up successfully.')
+
+      return navigate('/login', { replace: true })
+    }
   }
 
   return (
@@ -94,11 +115,11 @@ function SignUpPage() {
             <DefaultInput
               name='fullName'
               label='Full Name'
-              value={signupInfo?.fullName}
-              onChange={handleChangeSignUpInfo}
-              onKeyDown={handleKeyDownSignUpInfo}
-              errorStatus={errors?.fullName}
-              errorMsg='Please enter full name'
+              value={signUpInfos?.fullName}
+              onChange={handleChangeSignUpInfos}
+              onKeyDown={handleKeyDownSignUpInfos}
+              errorStatus={errorStatuses?.fullName}
+              errorMsg={errorMsgs?.fullName}
             />
           </div>
           <div className='signup-page__form__email'>
@@ -106,11 +127,11 @@ function SignUpPage() {
               name='email'
               type='email'
               label='Email ID'
-              value={signupInfo?.email}
-              onChange={handleChangeSignUpInfo}
-              onKeyDown={handleKeyDownSignUpInfo}
-              errorStatus={errors?.email}
-              errorMsg='Please enter email'
+              value={signUpInfos?.email}
+              onChange={handleChangeSignUpInfos}
+              onKeyDown={handleKeyDownSignUpInfos}
+              errorStatus={errorStatuses?.email}
+              errorMsg={errorMsgs?.email}
             />
           </div>
           <div className='signup-page__form__password'>
@@ -118,11 +139,11 @@ function SignUpPage() {
               name='password'
               type='password'
               label='Password'
-              value={signupInfo?.password}
-              onChange={handleChangeSignUpInfo}
-              onKeyDown={handleKeyDownSignUpInfo}
-              errorStatus={errors?.password}
-              errorMsg='Please enter password'
+              value={signUpInfos?.password}
+              onChange={handleChangeSignUpInfos}
+              onKeyDown={handleKeyDownSignUpInfos}
+              errorStatus={errorStatuses?.password}
+              errorMsg={errorMsgs?.password}
             />
           </div>
           <div className='signup-page__form__confirm-password'>
@@ -130,11 +151,11 @@ function SignUpPage() {
               name='confirmPassword'
               type='password'
               label='Confirm Password'
-              value={signupInfo?.confirmPassword}
-              onChange={handleChangeSignUpInfo}
-              onKeyDown={handleKeyDownSignUpInfo}
-              errorStatus={errors?.confirmPassword}
-              errorMsg='Please enter confirm password'
+              value={signUpInfos?.confirmPassword}
+              onChange={handleChangeSignUpInfos}
+              onKeyDown={handleKeyDownSignUpInfos}
+              errorStatus={errorStatuses?.confirmPassword}
+              errorMsg={errorMsgs?.confirmPassword}
             />
           </div>
           <DefaultButton

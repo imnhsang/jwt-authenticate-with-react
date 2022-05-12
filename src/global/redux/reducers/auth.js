@@ -12,15 +12,29 @@ const initialState = {
 const auth = (state = initialState, action) => {
   switch (action.type) {
   case Auth.FAIL_REQUEST_AUTH:
-    return { ...state, loading: false }
-  case Auth.REQUEST_AUTH_LOGIN:
+    return {
+      ...state,
+      loading: false
+    }
+  case Auth.REQUEST_LOGIN:
+    return {
+      ...state,
+      loading: true
+    }
+  case Auth.LOGIN:
+    return {
+      ...state,
+      loading        : false,
+      isAuthenticated: true
+    }
+  case Auth.REQUEST_LOGOUT:
     return { ...state, loading: true }
-  case Auth.AUTH_LOGIN:
-    return { ...state, loading: false, isAuthenticated: true }
-  case Auth.REQUEST_AUTH_LOGOUT:
-    return { ...state, loading: true }
-  case Auth.AUTH_LOGOUT:
-    return { ...state, isAuthenticated: false }
+  case Auth.LOGOUT:
+    return {
+      ...state,
+      loading        : false,
+      isAuthenticated: false,
+    }
   default:
     return state
   }
