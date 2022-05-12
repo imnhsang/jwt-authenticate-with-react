@@ -10,6 +10,7 @@ import { useMergeState, useCheckAuthentication } from 'components/Hooks'
 import { logIn } from 'global/redux/thunks/auth'
 
 import './style.scss'
+import { validateEmail } from 'utils/helpers'
 
 function LoginPage() {
   const dispatch = useDispatch()
@@ -21,7 +22,11 @@ function LoginPage() {
     email   : '',
     password: ''
   })
-  const [errors, setErrors] = useMergeState({
+  const [errorStatuses, setErrorStatuses] = useMergeState({
+    email   : false,
+    password: false
+  })
+  const [errorMsgs, setErrorMsgs] = useMergeState({
     email   : false,
     password: false
   })
@@ -41,8 +46,8 @@ function LoginPage() {
 
   const handleChangeLoginInfo = (e) => {
     const { name, value } = e.target
-    if (errors[name]) {
-      setErrors({ [name]: false })
+    if (errorStatuses[name]) {
+      setErrorStatuses({ [name]: false })
     }
 
     setLoginInfo({ [name]: value })
@@ -55,12 +60,23 @@ function LoginPage() {
 
     Object.keys(loginInfo).forEach((key) => {
       if (loginInfo[key]?.length === 0) {
-        setErrors({ [key]: true })
+        setErrorStatuses({ [key]: true })
+        setErrorMsgs({ [key]: `Please enter ${key}` })
+
         hasError = true
       } else {
-        setErrors({ [key]: false })
+        setErrorStatuses({ [key]: false })
+        setErrorMsgs({ [key]: '' })
       }
     })
+
+    if (!hasError) {
+      const isEmailValid = validateEmail(loginInfo?.email)
+      setErrorStatuses({ email: !isEmailValid })
+      setErrorMsgs({ email: !isEmailValid ? 'Email is invalid.' : '' })
+
+      hasError = !isEmailValid
+    }
 
     return hasError
   }
@@ -93,8 +109,8 @@ function LoginPage() {
               value={loginInfo?.email}
               onChange={handleChangeLoginInfo}
               onKeyDown={handleKeyDownLoginInfo}
-              errorStatus={errors?.email}
-              errorMsg='Please enter email'
+              errorStatus={errorStatuses?.email}
+              errorMsg={errorMsgs?.email}
             />
           </div>
           <div className='login-page__form__password'>
@@ -105,8 +121,8 @@ function LoginPage() {
               value={loginInfo?.password}
               onChange={handleChangeLoginInfo}
               onKeyDown={handleKeyDownLoginInfo}
-              errorStatus={errors?.password}
-              errorMsg='Please enter password'
+              errorStatus={errorStatuses?.password}
+              errorMsg={errorMsgs?.password}
             />
           </div>
           <DefaultButton

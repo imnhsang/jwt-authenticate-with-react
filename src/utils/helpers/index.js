@@ -1,5 +1,5 @@
 import { toast } from 'react-toastify'
-import { ToastType } from 'utils/constants'
+import { Regex, ToastType } from 'utils/constants'
 
 const getValueFromStorage = (name = '') => localStorage.getItem(name)
 
@@ -48,6 +48,8 @@ const catchThunkError = ({
 const splitCamelCaseToString = (str) =>
   str.split(/(?=[A-Z])/).map((p) => p.charAt(0).toLowerCase() + p.slice(1)).join(' ')
 
+const validateEmail = (email) => email.match(Regex.email)
+
 export {
   getValueFromStorage,
   removeValueFromStorage,
@@ -60,4 +62,5 @@ export {
   catchThunkError,
 
   splitCamelCaseToString,
+  validateEmail,
 }
