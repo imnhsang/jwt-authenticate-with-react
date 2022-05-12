@@ -7,7 +7,7 @@ import DefaultButton from 'components/Button/Default'
 
 import { useMergeState, useCheckAuthentication } from 'components/Hooks'
 
-import { login } from 'global/redux/thunks/auth'
+import { logIn } from 'global/redux/thunks/auth'
 
 import './style.scss'
 
@@ -72,9 +72,8 @@ function LoginPage() {
     }
 
     const { email, password } = loginInfo
-    const response = await dispatch(login(email, password))
+    const { status } = await dispatch(logIn(email, password))
 
-    const { status } = response
     if (status) {
       return handleRedirectPreviousPage()
     }

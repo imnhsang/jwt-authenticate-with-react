@@ -71,3 +71,9 @@
   align-items: $align-items;
   flex-direction: $direction;
 }
+
+@mixin square($size, $radius: 0) {
+  width: $size !important;
+  height: $size;
+  border-radius: $radius;
+}
